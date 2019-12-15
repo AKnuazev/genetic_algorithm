@@ -1,6 +1,3 @@
-// genetic_algorithm.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include "pch.h"
 #include <iostream>
 #include <vector>
@@ -53,8 +50,10 @@ void PrintPopulation(int population_num, std::vector<Individ> individs)
 		{
 			std::cout << "|";
 			if (population_num / 10 < 1)
+				std::cout << "  ";
+			else if (population_num / 100 < 1)
 				std::cout << " ";
-			std::cout << "         " << population_num << "         |    ";
+			std::cout << "        " << population_num << "         |    ";
 
 		}
 		else
@@ -127,7 +126,7 @@ void Mutation(Individ& individ)
 	if (do_mutation == 3) // 25%
 	{
 		mutated_gen_num = rand() % 2;
-		mutation_value = ((float)rand() / RAND_MAX)*0.2 - 0.1;
+		mutation_value = ((float)rand() / RAND_MAX)*0.6 - 0.3;
 
 		if (mutated_gen_num == 0)
 			individ.x += mutation_value;
@@ -181,15 +180,23 @@ void SelectionAndCrossover(std::vector<Individ>& individs, int population_num)
 		prev += fit_value;
 	}
 
-	// Print population info
-	std::cout << "POPULATION " << population_num << std::endl;
-	std::cout << "__________________________________________" << std::endl;
-	PrintPopulation(population_num, individs);
-	std::cout << std::endl;
+	// Print each 10 info
+	if (population_num % 10 == 0)
+	{
+		// Print population info
+		std::cout << std::endl;
+		std::cout << "POPULATION " << population_num << std::endl;
+		std::cout << "__________________________________________" << std::endl << std::endl;
+		PrintPopulation(population_num, individs);
+		std::cout << std::endl;
 
-	// Print sectors
-	PrintRoulette(fit_values);
-	std::cout << std::endl;
+		// Print sectors
+		PrintRoulette(fit_values);
+		std::cout << std::endl;
+
+		std::cout << std::endl << std::endl;
+	}
+
 
 	// Make rolls
 	float roll_1 = (float)rand() / RAND_MAX;
@@ -206,16 +213,15 @@ void SelectionAndCrossover(std::vector<Individ>& individs, int population_num)
 
 	// Crossover
 	Crossover(individs, selected);
-	std::cout << std::endl << std::endl << std::endl << std::endl;
-
 }
 
 int main()
 {
 	std::vector<Individ> population;
-	const int N = 50;  // number of populations
+	const int N = 99;  // number of populations
 
-	srand(time(NULL));
+	//srand(time(NULL));
+	srand(5);
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -229,6 +235,13 @@ int main()
 	{
 		SelectionAndCrossover(population, i);
 	}
+
+	// Last population
+	std::cout << "LAST POPULATION" << std::endl;
+	std::cout << "__________________________________________" << std::endl << std::endl;
+	PrintPopulation(N, population);
+	std::cout << std::endl;
+
 	std::cout << std::fixed << std::setprecision(3);
 	std::cout << "Result: " << FitFunc(*std::max_element(population.begin(), population.end(), CompareByFitFunc)) << std::endl;
 }
