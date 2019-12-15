@@ -220,9 +220,6 @@ int main()
 	std::vector<Individ> population;
 	const int N = 99;  // number of populations
 
-	//srand(time(NULL));
-	srand(5);
-
 	for (int i = 0; i < 4; i++)
 	{
 		Individ* curr_indiv = new Individ();
