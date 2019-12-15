@@ -43,9 +43,9 @@ void PrintPopulation(int population_num, std::vector<Individ> individs)
 	std::cout << std::fixed << std::setprecision(3);
 
 	std::cout << "Population:" << std::endl;
-	std::cout << " _________________________________________________________________________________________________________ " << std::endl;
-	std::cout << "|  Population number |  Gen 1 (X)  |  Gen 2 (Y)  |   FIT value  |   Max FIT value  |   Average FIT value  |" << std::endl;
-	std::cout << "|--------------------|-------------|-------------|--------------|------------------|----------------------|" << std::endl;
+	std::cout << " _________________________________________________________________________________________________________ \n";
+	std::cout << "|  Population number |  Gen 1 (X)  |  Gen 2 (Y)  |   FIT value  |   Max FIT value  |   Average FIT value  |\n";
+	std::cout << "|--------------------|-------------|-------------|--------------|------------------|----------------------|\n";
 	for (int i = 0; i < 4; i++)
 	{
 		// Print population number
@@ -85,7 +85,7 @@ void PrintPopulation(int population_num, std::vector<Individ> individs)
 
 		std::cout << std::endl;
 	}
-	std::cout << "|____________________|_____________|_____________|______________|__________________|______________________|" << std::endl;
+	std::cout << "|____________________|_____________|_____________|______________|__________________|______________________|\n";
 }
 
 void PrintRoulette(std::vector<float> sectors)
@@ -205,10 +205,6 @@ void SelectionAndCrossover(std::vector<Individ>& individs, int population_num)
 	std::cout << std::endl << std::endl << std::endl << std::endl;
 
 }
-
-// 10 50 30 10
-// |0-----|10----------|60-----|90-|100
-// 
 
 
 int main()
